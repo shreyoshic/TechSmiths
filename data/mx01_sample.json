@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "entity": "MX-01",
+      "claim": "temperature",
+      "value": 72,
+      "unit": "°C",
+      "source": "inspection_report.pdf",
+      "page": 3,
+      "classification": "inspection",
+      "source_hash": "sha256-inspection-demo"
+    },
+    {
+      "entity": "Machine 01",
+      "claim": "temperature",
+      "value": 91,
+      "unit": "°C",
+      "source": "technician_log.txt",
+      "page": 1,
+      "classification": "technician_log",
+      "source_hash": "sha256-technician-demo"
+    }
+  ]
+}
