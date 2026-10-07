@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TechSmiths — MX-01 AI Evidence</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:900px;margin:40px auto;padding:0 18px;background:#f6f7f9;color:#172033}
+.panel{background:#fff;border:1px solid #d9dee8;border-radius:14px;padding:22px;box-shadow:0 4px 18px #0000000d}
+textarea{width:100%;min-height:100px;box-sizing:border-box;padding:12px;border:1px solid #b9c2d0;border-radius:10px;font:inherit}
+button{margin-top:10px;padding:10px 16px;border:0;border-radius:9px;background:#172033;color:#fff;cursor:pointer}
+.evidence-card{border:1px solid #d9dee8;border-radius:10px;padding:14px;margin-top:12px;background:#fbfcfe}
+.score{float:right;font-size:12px;color:#657084}.evidence-card p{line-height:1.5}.evidence-card code{word-break:break-all}
+</style></head>
+<body>
+<div class="panel">
+<h1>TechSmiths AI</h1><p>FAISS retrieval for verified MX-01 evidence.</p>
+<textarea id="query" placeholder="Ask about MX-01..."></textarea><br>
+<button id="ask">Retrieve evidence</button>
+<div id="status" role="status" aria-live="polite"></div><section id="results"></section>
+</div>
+<script type="module">
+import {retrieveMX01Evidence, renderEvidence} from './ai-rag.js';
+const q=document.querySelector('#query'), b=document.querySelector('#ask'), s=document.querySelector('#status'), r=document.querySelector('#results');
+b.onclick=async()=>{try{b.disabled=true;r.replaceChildren();s.textContent='Retrieving…';const data=await retrieveMX01Evidence(q.value);renderEvidence(r,data);s.textContent=`${data.evidence.length} evidence chunk(s) retrieved.`}catch(e){s.textContent=e.message}finally{b.disabled=false}};
+</script>
+</body></html>
