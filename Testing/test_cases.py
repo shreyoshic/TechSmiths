@@ -19,9 +19,9 @@ from verification.claim_comparator import (
 from verification.verifier import verify_claims
 
 
-# =====================================================
+# ================================================
 # 1. ENTITY RESOLUTION TESTS
-# =====================================================
+# ================================================
 
 assert match_entity("MX-01", "MX01") is True
 
