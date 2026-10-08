@@ -1,0 +1,9 @@
+[
+    {
+        "document": "Inspection_Report.pdf",
+        "page": 1,
+        "text": "INSPECTION REPORT\nMachine ID: MX-01\nInspection Date: 03 October 2026\nMeasured Operating Temperature: 72°C\nVibration Level: Medium\nObserved Condition: Machine operating normally.\nInspector Recommendation: Continue monitoring temperature and vibration.",
+        "source_hash": "a015429fab22a06eb22d539f6f6f49ae02ae21681b28ae2d6adf16c2ec0d043a",
+        "extraction_method": "text"
+    }
+]
