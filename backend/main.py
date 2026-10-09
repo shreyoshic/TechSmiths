@@ -4,6 +4,7 @@ from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
 
 app = FastAPI()
+import sys
 import os
 
 documents_path = os.path.join(
