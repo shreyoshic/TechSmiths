@@ -1,0 +1,23 @@
+[
+    {
+        "document": "Technician_Log.pdf",
+        "page": 1,
+        "text": "TECHNICIAN LOG\nMachine ID: MX-01\nTechnician: Ravi Kumar\nObserved Temperature: 91°C\nIssue: Unusual vibration detected.",
+        "source_hash": "4a5e6c81b7b7c5ab8eef92dd9c710eb039c622dac24cebdb65bc4fadf3eff50f",
+        "extraction_method": "text"
+    },
+    {
+        "document": "Technician_Log.pdf",
+        "page": 2,
+        "text": "TECHNICIAN OBSERVATIONS\nIssue: Unusual noise detected.\nCooling System: Requires inspection.\nAction Taken: Machine stopped for further inspection.",
+        "source_hash": "4a5e6c81b7b7c5ab8eef92dd9c710eb039c622dac24cebdb65bc4fadf3eff50f",
+        "extraction_method": "text"
+    },
+    {
+        "document": "Technician_Log.pdf",
+        "page": 3,
+        "text": "Yes",
+        "source_hash": "4a5e6c81b7b7c5ab8eef92dd9c710eb039c622dac24cebdb65bc4fadf3eff50f",
+        "extraction_method": "text"
+    }
+]
