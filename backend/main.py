@@ -4,8 +4,18 @@ from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
 
 app = FastAPI()
-with open("all_documents.json", "r", encoding="utf-8") as f:
-    documents = json.load(f)
+import os
+
+documents_path = os.path.join(
+    os.path.dirname(__file__),
+    "all_documents.json"
+)
+
+if os.path.exists(documents_path):
+    with open(documents_path, "r", encoding="utf-8") as f:
+        documents = json.load(f)
+else:
+    documents = []
 
 
 class QuestionRequest(BaseModel):
