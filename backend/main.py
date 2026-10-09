@@ -1,95 +1,123 @@
-
-import json
 from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
+from pathlib import Path
+from pypdf import PdfReader
 
-app = FastAPI()
-import sys
-import os
+app = FastAPI(title="Hackfest Backend")
 
-documents_path = os.path.join(
-    os.path.dirname(__file__),
-    "all_documents.json"
-)
+# Backend storage folders
+BASE_DIR = Path(__file__).resolve().parent
+UPLOAD_DIR = BASE_DIR / "uploads"
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
-if os.path.exists(documents_path):
-    with open(documents_path, "r", encoding="utf-8") as f:
-        documents = json.load(f)
-else:
-    documents = []
-
-
+# Request model for the question endpoint
 class QuestionRequest(BaseModel):
     question: str
+
+# Temporary document list.
+# We will connect the extracted document text next.
+documents = []
 
 
 @app.get("/")
 def home():
     return {
-        "message": "Hackfest backend is running!"
+        "message": "Hackfest Backend is running!"
     }
-
 
 
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
-    os.makedirs("uploads", exist_ok=True)
-    file_path = os.path.join("uploads", file.filename)
+    filename = Path(file.filename or "uploaded_file").name
+    file_path = UPLOAD_DIR / filename
+
+    content = await file.read()
 
     with open(file_path, "wb") as f:
-        content = await file.read()
         f.write(content)
 
     return {
         "message": "File uploaded successfully",
-        "file": file.filename
+        "file": filename
     }
 
+
+
+
+    
+   
 @app.post("/question")
 def question(request: QuestionRequest):
+    question_words = set(request.question.lower().split())
+
+    stop_words = {
+        "what", "is", "the", "a", "an",
+        "of", "in", "to", "for", "and",
+        "recommended"
+    }
+    question_words -= stop_words
+
+    matches = []
+
+    # Read every PDF saved in the uploads folder
+    for pdf_file in UPLOAD_DIR.glob("*.pdf"):
+        try:
+            reader = PdfReader(str(pdf_file))
+
+            for page_number, page in enumerate(reader.pages, start=1):
+                text = page.extract_text() or ""
+                text_lower = text.lower()
+
+                score = sum(
+                    1 for word in question_words
+                    if word in text_lower
+                )
+
+                if score > 0:
+                    matches.append(
+                        (score, pdf_file.name, page_number, text)
+                    )
+
+        except Exception as error:
+            print(f"Could not read {pdf_file.name}: {error}")
+
+    matches.sort(key=lambda item: item[0], reverse=True)
+
+    if matches:
+        best_score, filename, page_number, text = matches[0]
+
+        return {
+            "question": request.question,
+            "answer": text[:1000],
+            "sources": [
+                f"{filename}, page {page_number}"
+            ],
+            "conflicts": [],
+            "verification_status": "PENDING"
+        }
+
     return {
-"answer": next((doc["text"] for doc in documents if any(word in doc["text"].lower() for word in request.question.lower().split())), "No matching information found"),
+        "question": request.question,
+        "answer": "No matching information found in uploaded PDFs.",
         "sources": [],
         "conflicts": [],
-        "verification_status": "PENDING",
-        "question": request.question
+        "verification_status": "PENDING"
     }
 
-@app.post("/verification")
-def verification(claims: list[str]):
-    results = []
 
-    for claim in claims:
-        if "91" in claim:
-            results.append({
-                "claim": claim,
-                "status": "CONFLICT",
-                "reason": "Technician Log reports 91°C, which exceeds the maximum operating temperature of 80°C."
-            })
-        else:
-            results.append({
-                "claim": claim,
-                "status": "PENDING",
-                "reason": "No verification rule for this claim yet."
-            })
-
+@app.get("/verification")
+def verification():
     return {
-        "message": "Verification completed",
-        "results": results
+        "status": "PENDING",
+        "message": "Document verification is not connected yet.",
+        "conflicts": []
     }
 
 
 @app.get("/report")
 def report():
     return {
-        "message": "Verification report generated",
-        "verification_status": "CONFLICT",
-        "conflicts": [
-            {
-                "issue": "Temperature exceeds safe limit",
-                "manual_limit": "80°C",
-                "observed_temperature": "91°C",
-                "source": "Technician_Log.pdf"
-            }
-        ]
+        "status": "PENDING",
+        "message": "Report generation is not connected yet.",
+        "documents": []
     }
