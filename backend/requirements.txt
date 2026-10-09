@@ -1,5 +1,10 @@
-
 fastapi
 uvicorn[standard]
 python-multipart
 sqlalchemy
+pymupdf
+pytesseract
+Pillow
+python-docx
+python-pptx
+openpyxl
