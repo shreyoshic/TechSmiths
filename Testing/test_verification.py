@@ -75,7 +75,12 @@ print(
 print("\n========== MX-01 VERIFICATION ==========\n")
 
 with open(
-    "sample_data/mx01_sample.json",
+    os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "data",
+        "mx01_sample.json"
+    ),
     "r",
     encoding="utf-8"
 ) as file:
