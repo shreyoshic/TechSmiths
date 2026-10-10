@@ -68,45 +68,45 @@ Prepared by: Person 6 - Testing and Integration
 
 
 
-\## Additional Testing Results — 10 October 2026
+## Additional Testing Results — 10 October 2026
 
 
 
-\### 1. Evidence Loading
+### 1. Evidence Loading
 
-\- Result: PASS
+Result: PASS
 
-\- Four evidence records loaded successfully.
+- Four evidence records loaded successfully.
 
-\- Source references and page locations were preserved.
+- Source references and page locations were preserved.
 
-\- The unrelated page 3 record containing only "Yes" was excluded pending clarification.
-
-
-
-\### 2. AI/RAG Health Check
-
-\- Result: PASS
-
-\- Application health: OK
-
-\- Verified evidence records loaded: 4
-
-\- Embedding model: sentence-transformers/all-MiniLM-L6-v2
-
-\- Application status: ready
+- The unrelated page 3 record containing only "Yes" was excluded pending clarification.
 
 
 
-\### 3. AI/RAG Retrieval
+### 2. AI/RAG Health Check
 
-\- Result: PASS
+- Result: PASS
 
-\- Query tested: "What is the operating temperature of MX-01?"
+- Application health: OK
 
-\- Retrieval status: retrieved
+- Verified evidence records loaded: 4
 
-\- Three source references returned:
+- Embedding model: sentence-transformers/all-MiniLM-L6-v2
+
+- Application status: ready
+
+
+
+### 3. AI/RAG Retrieval
+
+- Result: PASS
+
+- Query tested: "What is the operating temperature of MX-01?"
+
+- Retrieval status: retrieved
+
+- Three source references returned:
 
 &#x20; - Inspection\_Report.pdf#page=1
 
@@ -114,35 +114,35 @@ Prepared by: Person 6 - Testing and Integration
 
 &#x20; - Technician\_Log.pdf#page=1
 
-\- Both temperature observations, 72°C and 91°C, were returned.
+- Both temperature observations, 72°C and 91°C, were returned.
 
-\- Issue identified: temperature symbols display incorrectly in some API output.
-
-
-
-\### 4. Entity Matching and Conflict Detection
-
-\- Result: PASS for the tested cases.
-
-\- MX-01 matched MX01 and Machine 01.
-
-\- MX-01 did not match MX-02.
-
-\- Identical values returned MATCH.
-
-\- 72°C versus 91°C returned CONFLICT.
-
-\- The sample verification workflow reported CONFLICTS\_FOUND with one conflict.
+- Issue identified: temperature symbols display incorrectly in some API output.
 
 
 
-\### 5. Issues and Limitations
+### 4. Entity Matching and Conflict Detection
 
-\- Character encoding needs investigation.
+- Result: PASS for the tested cases.
 
-\- The verification sample uses demonstration source names and hashes rather than the actual PDF source references.
+- MX-01 matched MX01 and Machine 01.
 
-\- The verification logic has been tested, but integration of the verifier with real extracted evidence is not yet confirmed.
+- MX-01 did not match MX-02.
 
-\- Full frontend-to-backend end-to-end testing remains pending.
+- Identical values returned MATCH.
+
+- 72°C versus 91°C returned CONFLICT.
+
+- The sample verification workflow reported CONFLICTS\_FOUND with one conflict.
+
+
+
+### 5. Issues and Limitations
+
+- Character encoding needs investigation.
+
+- The verification sample uses demonstration source names and hashes rather than the actual PDF source references.
+
+- The verification logic has been tested, but integration of the verifier with real extracted evidence is not yet confirmed.
+
+- Full frontend-to-backend end-to-end testing remains pending.
 
