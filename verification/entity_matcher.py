@@ -1,36 +1,49 @@
+
 import re
 
+# Add equipment aliases here as needed.
 ENTITY_ALIASES = {
-    "mx01": {
-        "mx01",
-        "mx-01",
-        "machine01",
-        "machine 01",
-        "machine-01"
-    }
+    "mx01": [
+        "MX-01",
+        "MX01",
+        "Machine 01",
+        "Machine-01",
+    ],
+    "mx02": [
+        "MX-02",
+        "MX02",
+        "Machine 02",
+        "Machine-02",
+    ],
 }
 
 
 def normalize_entity(entity: str) -> str:
-    entity = entity.lower().strip()
-    entity = re.sub(r"[\s_-]+", "", entity)
-    return entity
+    """Normalize spacing, hyphens, underscores, and case."""
+    if not isinstance(entity, str):
+        return ""
+
+    return re.sub(r"[\s_-]+", "", entity.strip().lower())
 
 
 def match_entity(entity1: str, entity2: str) -> bool:
+    """Return True when two names refer to the same known entity."""
     e1 = normalize_entity(entity1)
     e2 = normalize_entity(entity2)
+
+    if not e1 or not e2:
+        return False
 
     if e1 == e2:
         return True
 
     for canonical, aliases in ENTITY_ALIASES.items():
-        normalized_aliases = {
-            normalize_entity(alias)
-            for alias in aliases
+        known_names = {
+            normalize_entity(canonical),
+            *(normalize_entity(alias) for alias in aliases),
         }
 
-        if e1 in normalized_aliases and e2 in normalized_aliases:
+        if e1 in known_names and e2 in known_names:
             return True
 
     return False
