@@ -10,8 +10,8 @@ Verify that the project modules work together to produce a verifiable document w
 
 | No. | Integration Check | Expected Result | Status |
 |---|---|---|---|
-| 1 | Frontend sends uploaded documents to backend | Backend receives the documents successfully | NOT TESTED |
-| 2 | Backend sends PDFs to document extraction | Text is extracted from PDF documents | PARTIALLY TESTED |
+| 1 | Frontend sends uploaded documents to backend | Backend receives the documents successfully | PASSED |
+| 2 | Backend sends PDFs to document extraction | Text is extracted from PDF documents | PASSED |
 | 3 | Backend sends scanned images to OCR | Text is extracted from image documents | PASS - Standalone Test |
 | 4 | Extracted text is passed to AI/RAG | Evidence is prepared for retrieval | BLOCKED - Real evidence unavailable |
 | 5 | Retrieval returns relevant evidence | Relevant excerpts and source references are returned | PASS - Unit Tests Only |
