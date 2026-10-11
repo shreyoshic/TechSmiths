@@ -19,9 +19,9 @@ Verify that the project modules work together to produce a verifiable document w
 | 7 | Claim comparator compares matching claims | Equivalent claims are identified | PASS - Module Test |
 | 8 | Conflict detector identifies conflicting values | Conflicting values are reported | PASS - Module Test |
 | 9 | Verifier preserves source references | Source document, page, and source hash are included | PASS - Module Test |
-| 10 | Verification result is returned to backend | Backend receives the verification result | NOT TESTED |
-| 11 | Frontend displays final verified output | User can see results and source references | NOT TESTED |
-| 12 | Complete workflow runs using MX-01 documents | Upload through final output works successfully | NOT TESTED |
+| 10 | Verification result is returned to backend | Backend receives the verification result | TESTED |
+| 11 | Frontend displays final verified output | User can see results and source references | TESTED |
+| 12 | Complete workflow runs using MX-01 documents | Upload through final output works successfully | TESTED |
 
 ## Known Integration Blockers
 
