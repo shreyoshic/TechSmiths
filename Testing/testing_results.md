@@ -23,7 +23,7 @@ Testing and Integration
 |Source References|Preserve document, page, and source hash|Source information appeared in verification output|PASS|
 |Existing Team Tests|Run existing test suite|All P5 tests passed|PASS|
 |Retrieval Tests|Verify retrieval behavior|Three tests ran successfully|PASS|
-|Real MX-01 Retrieval|Retrieve actual verified MX-01 evidence|Evidence file is empty; real-source retrieval not verified|BLOCKEDf|
+|Real MX-01 Retrieval|Retrieve actual verified MX-01 evidence|Evidence file is empty; real-source retrieval not verified|BLOCKED|
 
 ## 2\. Issues Identified
 
